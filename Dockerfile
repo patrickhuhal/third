@@ -38,8 +38,6 @@ ENV LD_LIBRARY_PATH=/opt/ibm/clang-ykt/lib:/usr/local/cuda/lib64/stubs:$LD_LIBRA
 ENV LIBRARY_PATH=/opt/ibm/clang-ykt/lib:/usr/local/cuda-8.0/lib64:/usr/lib/nvidia-361:$LIBRARY_PATH
 ENV PATH=/opt/ibm/clang-ykt/bin:/usr/local/cuda/bin:$PATH
 
-
-
 # Compiler is built in /opt/ibm/clang-ykt/bin/
 RUN apt-get -y update && \
     apt-get -y install curl iputils-ping unzip && \
