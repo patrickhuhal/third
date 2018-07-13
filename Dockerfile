@@ -68,7 +68,7 @@ ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
 
 
 
-COPY mpi_bandwidth.c /tmp/mpi_bandwidth.c
+ADD mpi_bandwidth.c /tmp/mpi_bandwidth.c
 RUN mkdir -p /workspace && \
     mpicc -o /workspace/mpi_bandwidth /tmp/mpi_bandwidth.c
 
