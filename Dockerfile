@@ -11,7 +11,7 @@
 #   Python 2 and 3 (upstream)
 # 
 
-FROM nvidia/cuda:9.0-devel-ubuntu16.04 AS devel
+FROM nvidia/cuda-ppc64le:9.0-devel-ubuntu16.04 AS devel
 
 # Python
 RUN apt-get update -y && \
