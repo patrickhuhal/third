@@ -68,9 +68,9 @@ ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
 
 
 
-ADD mpi_bandwidth.c /tmp/mpi_bandwidth.c
+ADD mpi_bw.c /tmp/mpi_bw.c
 RUN mkdir -p /workspace && \
-    mpicc -o /workspace/mpi_bandwidth /tmp/mpi_bandwidth.c
+    mpicc -o /workspace/mpi_bw /tmp/mpi_bw.c
 
 #RUN apt-get update && apt-get install -y --no-install-recommends \
 #           libelf1 libelf-dev \
