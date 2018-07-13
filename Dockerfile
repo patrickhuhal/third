@@ -63,38 +63,9 @@ RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
     PATH=/usr/local/openmpi/bin:$PATH
 
-# FFTW version 3.3.7
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
-        file \
-        make \
-        wget && \
-    rm -rf /var/lib/apt/lists/*
-RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp ftp://ftp.fftw.org/pub/fftw/fftw-3.3.7.tar.gz && \
-    mkdir -p /var/tmp && tar -x -f /var/tmp/fftw-3.3.7.tar.gz -C /var/tmp -z && \
-    cd /var/tmp/fftw-3.3.7 &&  CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/fftw --enable-shared --enable-openmp --enable-threads --enable-sse2 && \
-    make -j4 && \
-    make -j4 install && \
-    rm -rf /var/tmp/fftw-3.3.7.tar.gz /var/tmp/fftw-3.3.7
-ENV LD_LIBRARY_PATH=/usr/local/fftw/lib:$LD_LIBRARY_PATH
 
-# HDF5 version 1.10.1
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
-        file \
-        make \
-        wget \
-        zlib1g-dev && \
-    rm -rf /var/lib/apt/lists/*
-RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.1/src/hdf5-1.10.1.tar.bz2 && \
-    mkdir -p /var/tmp && tar -x -f /var/tmp/hdf5-1.10.1.tar.bz2 -C /var/tmp -j && \
-    cd /var/tmp/hdf5-1.10.1 &&  CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/hdf5 --enable-cxx --enable-fortran && \
-    make -j4 && \
-    make -j4 install && \
-    rm -rf /var/tmp/hdf5-1.10.1.tar.bz2 /var/tmp/hdf5-1.10.1
-ENV HDF5_DIR=/usr/local/hdf5 \
-    LD_LIBRARY_PATH=/usr/local/hdf5/lib:$LD_LIBRARY_PATH \
-    PATH=/usr/local/hdf5/bin:$PATH
+
+
 
 COPY mpi_bandwidth.c /tmp/mpi_bandwidth.c
 RUN mkdir -p /workspace && \
