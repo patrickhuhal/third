@@ -1,0 +1,29 @@
+{
+
+    "name": "Jonas Ubuntu cuda9+openmpi3", 
+    "description": "HPC environment on POWER", 
+    "author": "Jonas Toelke", 
+    "licensed": true, 
+    "classifications": [
+        "Software Development",
+        "Software Testing"
+    ], 
+    "machines": [
+        "*"
+    ],
+    "vault-types": [
+        "FILE", 
+        "BLOCK", 
+        "BLOCK_ARRAY", 
+        "OBJECT"
+    ], 
+    "commands": {
+        "launch": {
+            "path": "/sbin/init", 
+            "interactive": true, 
+            "name": "Launch", 
+            "description": "Launch and ephemeral environment and connect via SSH.", 
+            "parameters": {}
+        }
+    }, 
+}
