@@ -96,10 +96,9 @@ ENV HDF5_DIR=/usr/local/hdf5 \
     LD_LIBRARY_PATH=/usr/local/hdf5/lib:$LD_LIBRARY_PATH \
     PATH=/usr/local/hdf5/bin:$PATH
 
-
-
-
-
+COPY mpi_bandwidth.c /tmp/mpi_bandwidth.c
+RUN mkdir -p /workspace && \
+    mpicc -o /workspace/mpi_bandwidth /tmp/mpi_bandwidth.c
 
 #RUN apt-get update && apt-get install -y --no-install-recommends \
 #           libelf1 libelf-dev \
