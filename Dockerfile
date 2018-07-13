@@ -16,6 +16,7 @@ FROM nvidia/cuda-ppc64le:9.0-devel-ubuntu16.04 AS devel
 # Python
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
+        curl \
         python \
         python3 && \
     rm -rf /var/lib/apt/lists/*
