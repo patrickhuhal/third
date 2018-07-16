@@ -35,7 +35,7 @@ RUN apt-get update -y && \
         perftest \
         cuda-samples-9-2
      
-ENV OPENMPI_VERS=openmpi-3.1.1.tar.bz2     
+ENV OPENMPI_VERS 3.1.1     
 RUN mkdir -p /var/tmp && \
     wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-$OPENMPI_VERS.tar.bz2 && \
     tar -x -f /var/tmp/openmpi-$OPENMPI_VERS.tar.bz2 -C /var/tmp -j && \
