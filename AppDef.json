@@ -25,5 +25,5 @@
             "description": "Launch and ephemeral environment and connect via SSH.", 
             "parameters": {}
         }
-    }, 
+    }
 }
