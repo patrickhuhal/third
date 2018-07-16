@@ -52,7 +52,7 @@ ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
 
 RUN mkdir -p /workspace
 ADD mpi_bw.c /workspace
-RUN mpicc -o /workspace/mpi_bw /tmp/mpi_bw.c
+RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
     
 RUN cd /usr/local/cuda/samples && make -j16
 
