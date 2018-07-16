@@ -2,8 +2,8 @@
 # HPC Base image
 # 
 # Contents:
-#   CUDA version 9.2
-#   OpenMPI version 3.1.1
+#   CUDA
+#   OpenMPI 
 #   Python 2 and 3 (upstream)
 #   gnu compilers
 
@@ -18,7 +18,8 @@ RUN apt-get update -y && \
         g++ \
         gfortran \
         libnuma1 \
-        pciutils
+        pciutils \
+        htop
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
@@ -40,10 +41,10 @@ ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
 RUN mkdir -p /var/tmp 
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v${OPENMPI_VERS_MAJ}/downloads/openmpi-${OPENMPI_VERS}.tar.bz2
 RUN tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j 
-RUN cd /var/tmp/openmpi-${OPENMPI_VERS}
-RUN CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/openmpi --disable-getpwuid --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs
-RUN make -j16
-RUN make -j16 install
+RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
+    CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/openmpi --disable-getpwuid --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs && \
+    make -j16 && \
+    make -j16 install
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
