@@ -17,7 +17,8 @@ RUN apt-get update -y && \
         gcc \
         g++ \
         gfortran \
-        libnuma1 
+        libnuma1 \
+        pciutils
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
@@ -46,13 +47,8 @@ ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
 ADD mpi_bw.c /tmp/mpi_bw.c
 RUN mkdir -p /workspace && \
     mpicc -o /workspace/mpi_bw /tmp/mpi_bw.c
-
-#RUN apt-get update && apt-get install -y --no-install-recommends \
-#           libelf1 libelf-dev \
-#            libffi6 libffi-dev \
-#            build-essential \
-#            git \
-#            cmake \
+    
+RUN cd /usr/local/cuda/samples && make -j16
 
 ADD url.txt /etc/NAE/url.txt
 ADD help.html /etc/NAE/help.html
