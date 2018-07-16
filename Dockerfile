@@ -34,19 +34,23 @@ RUN apt-get update -y && \
         wget \
         perftest \
         cuda-samples-9-2
-        
-RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.bz2 && \
-    mkdir -p /var/tmp && tar -x -f /var/tmp/openmpi-3.0.0.tar.bz2 -C /var/tmp -j && \
-    cd /var/tmp/openmpi-3.0.0 &&  CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/openmpi --disable-getpwuid --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs && \
-    make -j4 && \
-    make -j4 install && \
-    rm -rf /var/tmp/openmpi-3.0.0.tar.bz2 /var/tmp/openmpi-3.0.0
+     
+ENV OPENMPI_VERS=openmpi-3.1.1.tar.bz2     
+RUN mkdir -p /var/tmp && \
+    wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-$OPENMPI_VERS.tar.bz2 && \
+    tar -x -f /var/tmp/openmpi-$OPENMPI_VERS.tar.bz2 -C /var/tmp -j && \
+    cd /var/tmp/openmpi-$OPENMPI_VERS &&  \
+    CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/openmpi --disable-getpwuid --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs && \
+    make -j16 && \
+    make -j16 install && \
+    rm -rf /var/tmp/openmpi-$OPENMPI_VERS.tar.bz2 /var/tmp/openmpi-$OPENMPI_VERS
+
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
     PATH=/usr/local/openmpi/bin:$PATH
 
-ADD mpi_bw.c /tmp/mpi_bw.c
-RUN mkdir -p /workspace && \
-    mpicc -o /workspace/mpi_bw /tmp/mpi_bw.c
+RUN mkdir -p /workspace
+ADD mpi_bw.c /workspace
+RUN mpicc -o /workspace/mpi_bw /tmp/mpi_bw.c
     
 RUN cd /usr/local/cuda/samples && make -j16
 
