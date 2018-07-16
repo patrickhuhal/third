@@ -2,14 +2,11 @@
 # HPC Base image
 # 
 # Contents:
-#   CUDA version 9.0
-#   FFTW version 3.3.7
-#   GNU compilers (upstream)
-#   HDF5 version 1.10.1
-#   Mellanox OFED version 3.4-1.0.0.0
+#   CUDA version 9.2
 #   OpenMPI version 3.0.0
 #   Python 2 and 3 (upstream)
-# 
+#   gnu compilers
+
 FROM nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04 AS devel
 
 # Python + gnu compiler
@@ -33,7 +30,8 @@ RUN apt-get update -y && \
         make \
         perl \
         tar \
-        wget
+        wget \
+        perftest
         
 RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.bz2 && \
     mkdir -p /var/tmp && tar -x -f /var/tmp/openmpi-3.0.0.tar.bz2 -C /var/tmp -j && \
