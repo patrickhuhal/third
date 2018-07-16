@@ -15,7 +15,7 @@
 #define MAXTASKS      8192
 /* Change the next four parameters to suit your case */
 #define STARTSIZE     100000
-#define ENDSIZE       1000000
+#define ENDSIZE       10000000
 #define INCREMENT     100000
 #define ROUNDTRIPS    100
 
