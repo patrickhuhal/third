@@ -37,13 +37,13 @@ RUN apt-get update -y && \
      
 ENV OPENMPI_VERS 3.1.1     
 RUN mkdir -p /var/tmp && \
-    wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-$OPENMPI_VERS.tar.bz2 && \
-    tar -x -f /var/tmp/openmpi-$OPENMPI_VERS.tar.bz2 -C /var/tmp -j && \
-    cd /var/tmp/openmpi-$OPENMPI_VERS &&  \
+    wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-${OPENMPI_VERS}.tar.bz2 && \
+    tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j && \
+    cd /var/tmp/openmpi-${OPENMPI_VERS} &&  \
     CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/openmpi --disable-getpwuid --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs && \
     make -j16 && \
     make -j16 install && \
-    rm -rf /var/tmp/openmpi-$OPENMPI_VERS.tar.bz2 /var/tmp/openmpi-$OPENMPI_VERS
+    rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
     PATH=/usr/local/openmpi/bin:$PATH
