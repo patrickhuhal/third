@@ -31,7 +31,8 @@ RUN apt-get update -y && \
         perl \
         tar \
         wget \
-        perftest
+        perftest \
+        cuda-samples-9-2
         
 RUN mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.bz2 && \
     mkdir -p /var/tmp && tar -x -f /var/tmp/openmpi-3.0.0.tar.bz2 -C /var/tmp -j && \
