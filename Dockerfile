@@ -19,7 +19,8 @@ RUN apt-get update -y && \
         gfortran \
         libnuma1 \
         pciutils \
-        htop
+        htop \
+        nano
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
@@ -34,7 +35,8 @@ RUN apt-get update -y && \
         tar \
         wget \
         perftest \
-        cuda-samples-9-2
+        cuda-samples-9-2 \
+        libnuma-dev
      
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
