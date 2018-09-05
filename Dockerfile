@@ -20,7 +20,9 @@ RUN apt-get update -y && \
         libnuma1 \
         pciutils \
         htop \
-        nano
+        nano \
+        xutils-dev \
+        libboost-serialization1.58-dev
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
@@ -36,7 +38,7 @@ RUN apt-get update -y && \
         wget \
         perftest \
         cuda-samples-9-2 \
-        libnuma-dev
+        libnuma-dev 
      
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
