@@ -1,4 +1,4 @@
-# 
+ # 
 # HPC Base image
 # 
 # Contents:
@@ -22,7 +22,8 @@ RUN apt-get update -y && \
         htop \
         nano \
         xutils-dev \
-        libboost-serialization1.58-dev
+        libboost-serialization1.58-dev \
+        iputils-ping
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
