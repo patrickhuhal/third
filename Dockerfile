@@ -1,6 +1,4 @@
- # 
 # HPC Base image
-# 
 # Contents:
 #   CUDA
 #   OpenMPI 
@@ -23,7 +21,8 @@ RUN apt-get update -y && \
         nano \
         xutils-dev \
         libboost-serialization1.58-dev \
-        iputils-ping
+        iputils-ping \
+        cmake-curses-gui
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
