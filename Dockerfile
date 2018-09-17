@@ -20,9 +20,9 @@ RUN apt-get update -y && \
         htop \
         nano \
         xutils-dev \
-        libboost-serialization1.58-dev \
         iputils-ping \
-        cmake-curses-gui
+        cmake-curses-gui \
+        libboost-all-dev
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
