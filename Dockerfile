@@ -64,7 +64,7 @@ RUN mkdir -p /workspace
 ADD mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
     
-RUN cd /usr/local/cuda/samples && make -j16 -k
+RUN cd /usr/local/cuda/samples && make -j16 -k ; exit 0
 
 ADD url.txt /etc/NAE/url.txt
 ADD help.html /etc/NAE/help.html
