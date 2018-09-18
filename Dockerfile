@@ -1,4 +1,3 @@
-
 # HPC Base image
 # Contents:
 #   CUDA
@@ -6,8 +5,8 @@
 #   Python 2 and 3 (upstream)
 #   gnu compilers
 
-#ENV power=1
-if [ "$power" ]; then 
+ENV arch=power
+if [ "$arch" = "power" ]; then 
   FROM nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04 AS devel
 else  
   FROM nvidia/cuda:9.2-devel-ubuntu16.04 AS devel
