@@ -5,7 +5,9 @@
 #   Python 2 and 3 (upstream)
 #   gnu compilers
 
-FROM nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04 AS devel
+# FROM nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04 AS devel
+FROM nvidia/cuda:9.2-devel-ubuntu16.04 AS devel
+
 
 # Python + gnu compiler
 RUN apt-get update -y && \
