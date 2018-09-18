@@ -5,12 +5,13 @@
 #   Python 2 and 3 (upstream)
 #   gnu compilers
 
-ENV arch=intel
-if [ "$arch" = "power" ]; then 
-  FROM nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04 AS devel
-else  
-  FROM nvidia/cuda:9.2-devel-ubuntu16.04 AS devel
-fi
+#ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
+#ARG appdef=AppDef.json
+
+ARG baseimg=nvidia/cuda:9.2-devel-ubuntu16.04
+ARG appdef=AppDef1.json
+
+FROM $baseimg AS devel
 
 # Python + gnu compiler
 RUN apt-get update -y && \
@@ -67,7 +68,7 @@ RUN cd /usr/local/cuda/samples && make -j16 -k
 
 ADD url.txt /etc/NAE/url.txt
 ADD help.html /etc/NAE/help.html
-ADD AppDef.json /etc/NAE/AppDef.json
+ADD $appdef /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 # Expose port 22 for local JARVICE emulation in docker
