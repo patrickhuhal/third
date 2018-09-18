@@ -1,3 +1,4 @@
+
 # HPC Base image
 # Contents:
 #   CUDA
@@ -5,9 +6,12 @@
 #   Python 2 and 3 (upstream)
 #   gnu compilers
 
-# FROM nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04 AS devel
-FROM nvidia/cuda:9.2-devel-ubuntu16.04 AS devel
-
+#ENV power=1
+if [ "$power" ]; then 
+  FROM nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04 AS devel
+else  
+  FROM nvidia/cuda:9.2-devel-ubuntu16.04 AS devel
+fi
 
 # Python + gnu compiler
 RUN apt-get update -y && \
@@ -60,7 +64,7 @@ RUN mkdir -p /workspace
 ADD mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
     
-RUN cd /usr/local/cuda/samples && make -j16
+RUN cd /usr/local/cuda/samples && make -j16 -k
 
 ADD url.txt /etc/NAE/url.txt
 ADD help.html /etc/NAE/help.html
