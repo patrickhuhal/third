@@ -1,5 +1,5 @@
 {
-    "name": "Jonas Ubuntu cuda9+openmpi3", 
+    "name": "Jonas Power Ubuntu cuda9+openmpi3", 
     "description": "HPC environment on POWER", 
     "author": "Jonas Toelke", 
     "licensed": true, 
