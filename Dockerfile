@@ -8,7 +8,7 @@
 #ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
 #ARG appdef=AppDef.json
 
-ARG baseimg=nvidia/cuda:9.2-devel-ubuntu16.04
+ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
 #ARG appdef=AppDef1.json
 
 FROM $baseimg AS devel
