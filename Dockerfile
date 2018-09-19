@@ -7,9 +7,11 @@
 
 #ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
 #ARG appdef=AppDef.json
+#ARG sample=9-2
 
 ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
 #ARG appdef=AppDef1.json
+ARG sample=9-0
 
 FROM $baseimg AS devel
 
@@ -49,7 +51,7 @@ RUN apt-get update -y && \
         tar \
         wget \
         perftest \
-        cuda-samples-9-2 \
+        cuda-samples-${sample} \
         libnuma-dev 
      
 ENV OPENMPI_VERS_MAJ=3.1
