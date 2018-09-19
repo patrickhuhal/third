@@ -6,22 +6,20 @@
 #   gnu compilers
 
 #power8
-#ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
+ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
 
 #intel
-ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
+#ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
 
 FROM $baseimg AS devel
 
 #power8
-####COPY AppDef.json /etc/NAE/AppDef.json
-#ARG appdef=AppDef.json
-#ARG sample=9-2
+ARG appdef=AppDef.json
+ARG sample=9-2
 
 #intel
-#COPY AppDef1.json /etc/NAE/AppDef.json
-ARG appdef=AppDef1.json
-ARG sample=9-0
+#ARG appdef=AppDef1.json
+#ARG sample=9-0
 
 
 # Python + gnu compiler
