@@ -75,7 +75,7 @@ RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
     
-RUN cd /usr/local/cuda/samples && make -j16 #-k ; exit 0
+RUN cd /usr/local/cuda/samples && make -j16 -k ; exit 0
 
 COPY url.txt /etc/NAE/url.txt
 COPY help.html /etc/NAE/help.html
