@@ -61,14 +61,14 @@ ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
     PATH=/usr/local/openmpi/bin:$PATH
 
 RUN mkdir -p /workspace
-ADD mpi_bw.c /workspace
+COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
     
 RUN cd /usr/local/cuda/samples && make -j16 -k ; exit 0
 
-ADD url.txt /etc/NAE/url.txt
-ADD help.html /etc/NAE/help.html
-ADD AppDef.json /etc/NAE/AppDef.json
+COPY url.txt /etc/NAE/url.txt
+COPY help.html /etc/NAE/help.html
+COPY $appdef /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 # Expose port 22 for local JARVICE emulation in docker
