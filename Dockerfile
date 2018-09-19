@@ -11,7 +11,7 @@
 
 ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
 #ARG appdef=AppDef1.json
-ARG sample=9-0
+ENV sample=9-0
 
 FROM $baseimg AS devel
 
