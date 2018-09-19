@@ -6,20 +6,20 @@
 #   gnu compilers
 
 #power8
-ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
+#ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
 
 #intel
-#ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
+ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
 
 FROM $baseimg AS devel
 
 #power8
-ARG appdef=AppDef.json
-ARG sample=9-2
+#ARG appdef=AppDef.json
+#ARG sample=9-2
 
 #intel
-#ARG appdef=AppDef1.json
-#ARG sample=9-0
+ARG appdef=AppDef1.json
+ARG sample=9-0
 
 
 # Python + gnu compiler
@@ -72,7 +72,8 @@ ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
-    
+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/usr/lib/nvidia-396
 RUN cd /usr/local/cuda/samples && make -j16 -k ; exit 0
 
 COPY url.txt /etc/NAE/url.txt
