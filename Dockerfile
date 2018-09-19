@@ -5,22 +5,23 @@
 #   Python 2 and 3 (upstream)
 #   gnu compilers
 
+#power8
 #ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
-#ARG appdef=AppDef.json
 
-
+#intel
 ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
-#ARG appdef=AppDef1.json
 
 FROM $baseimg AS devel
 
 #power8
-#COPY AppDef.json /etc/NAE/AppDef.json
+####COPY AppDef.json /etc/NAE/AppDef.json
+#ARG appdef=AppDef.json
 #ARG sample=9-2
 
 #intel
-COPY AppDef1.json /etc/NAE/AppDef.json
-ENV sample=9-0
+#COPY AppDef1.json /etc/NAE/AppDef.json
+ARG appdef=AppDef1.json
+ARG sample=9-0
 
 
 # Python + gnu compiler
@@ -78,7 +79,7 @@ RUN cd /usr/local/cuda/samples && make -j16 #-k ; exit 0
 
 COPY url.txt /etc/NAE/url.txt
 COPY help.html /etc/NAE/help.html
-# COPY AppDef.json /etc/NAE/AppDef.json
+COPY $appdef /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 # Expose port 22 for local JARVICE emulation in docker
