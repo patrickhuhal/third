@@ -13,6 +13,11 @@ ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
 
 FROM $baseimg AS devel
 
+#power8
+COPY AppDef.json /etc/NAE/AppDef.json
+#intel
+#COPY AppDef1.json /etc/NAE/AppDef.json
+
 # Python + gnu compiler
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
