@@ -73,6 +73,7 @@ RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 
+RUN ls -ld /usr/lib/nvidia*
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/usr/lib/nvidia-396
 RUN cd /usr/local/cuda/samples && make -j16 -k ; exit 0
 
