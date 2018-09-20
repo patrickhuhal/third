@@ -38,7 +38,8 @@ RUN apt-get update -y && \
         iputils-ping \
         cmake-curses-gui \
         libboost-all-dev \
-        ibverbs-utils
+        ibverbs-utils \
+        numactl
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
