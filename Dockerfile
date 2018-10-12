@@ -48,7 +48,8 @@ RUN apt-get update -y && \
         ibverbs-utils \
         numactl \
         ltrace \
-        strace
+        strace \
+        emacs
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
