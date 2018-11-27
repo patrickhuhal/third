@@ -6,10 +6,10 @@
 #   gnu compilers
 
 #power8
-#ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
+ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
 
 #power9
-ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu18.04
+#ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu18.04
 
 #intel
 #ARG baseimg=nvidia/cuda:9.0-devel-ubuntu16.04
@@ -17,12 +17,12 @@ ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu18.04
 FROM $baseimg AS devel
 
 #power8
-#ARG appdef=AppDef.json
-#ARG sample=9-2
+ARG appdef=AppDef.json
+ARG sample=9-2
 
 #power9
-ARG appdef=AppDef2.json
-ARG sample=9-2
+#ARG appdef=AppDef2.json
+#ARG sample=9-2
 
 #intel
 #ARG appdef=AppDef1.json
@@ -96,6 +96,6 @@ COPY $appdef /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 # Expose port 22 for local JARVICE emulation in docker
-#EXPOSE 22
+EXPOSE 22
 
 
