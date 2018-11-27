@@ -95,6 +95,12 @@ COPY help.html /etc/NAE/help.html
 COPY $appdef /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
+# Anaconda Python
+RUN wget https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-ppc64le.sh
+RUN bash Anaconda3-5.3.0-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
+ENV PATH=/usr/local/anaconda3/bin:$PATH
+RUN conda install -c conda-forge boost
+
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
 
