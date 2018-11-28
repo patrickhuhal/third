@@ -101,6 +101,13 @@ RUN bash Anaconda3-5.3.0-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
 ENV PATH /usr/local/anaconda3/bin:$PATH
 RUN conda install -c conda-forge boost
 
+USER nimbix
+RUN jupyter notebook --generate-config
+RUN echo "c.NotebookApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_notebook_config.py
+RUN echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
+RUN echo "c.NotebookApp.open_browser = True" >> ~/.jupyter/jupyter_notebook_config.py
+USER root
+
 RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
 RUN conda create -n tf python=3.6 keras-gpu=2.1.5 tensorflow-gpu numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter
