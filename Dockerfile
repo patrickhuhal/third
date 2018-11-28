@@ -101,7 +101,7 @@ RUN bash Anaconda3-5.3.0-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
 ENV PATH /usr/local/anaconda3/bin:$PATH
 RUN conda install -c conda-forge boost
 
-RUN sudo cat "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
+RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
