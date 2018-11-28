@@ -1,6 +1,6 @@
 {
     "name": "Clone of Jonas Power Ubuntu cuda9+openmpi3, with Anaconda Python and TensorFlow", 
-    "description": "HPC environment on POWER", 
+    "description": "HPC/ML environment on POWER", 
     "author": "Jonas Toelke", 
     "licensed": true, 
     "classifications": [
