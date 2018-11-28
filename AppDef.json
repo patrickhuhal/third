@@ -21,7 +21,7 @@
             "path": "/sbin/init", 
             "interactive": true, 
             "name": "Launch", 
-            "description": "Launch and ephemeral environment and connect via SSH; conda activate tf for TensorFlow env.", 
+            "description": "Launch an ephemeral environment and connect via SSH; conda activate tf for TensorFlow env.", 
             "parameters": {}
         }
     }, 
