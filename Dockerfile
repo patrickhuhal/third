@@ -112,6 +112,8 @@ RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
 RUN conda create -n tf -c conda-forge python=3.6 keras-gpu=2.1.5 tensorflow-gpu numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost
 
+RUN conda create -n py35 -c conda-forge python=3.5 numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost
+
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
 
