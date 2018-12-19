@@ -1,5 +1,5 @@
 {
-    "name": "Clone of Jonas Power Ubuntu cuda9+openmpi3, with Anaconda Python and TensorFlow", 
+    "name": "Anaconda Python", 
     "description": "HPC/ML environment on POWER", 
     "author": "Jonas Toelke", 
     "licensed": true, 
@@ -21,7 +21,7 @@
             "path": "/sbin/init", 
             "interactive": true, 
             "name": "Launch", 
-            "description": "Launch an ephemeral environment and connect via SSH; conda activate tf for TensorFlow env.", 
+            "description": "Launch an ephemeral environment and connect via SSH", 
             "parameters": {}
         }
     }, 
