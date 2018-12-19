@@ -106,13 +106,11 @@ RUN jupyter notebook --generate-config
 RUN echo "c.NotebookApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_notebook_config.py
 RUN echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
 RUN echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
+COPY ~/.jupyter/jupyter_notebook_config.py /tmp/
+COPY /tmp/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
 USER root
 
 RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
-
-RUN conda create -n tf -c conda-forge python=3.6 keras-gpu=2.1.5 tensorflow-gpu numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost
-
-RUN conda create -n py35 -c conda-forge python=3.5 numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost
 
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
