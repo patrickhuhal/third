@@ -106,11 +106,13 @@ RUN jupyter notebook --generate-config
 RUN echo "c.NotebookApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_notebook_config.py
 RUN echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
 RUN echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
+RUN pwd
 RUN ls -al ~
-USER root
-COPY /home/nimbix/.jupyter/jupyter_notebook_config.py /tmp/
-USER nimbix
-COPY /tmp/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
+COPY /home/nimbix/.jupyter/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
+#USER root
+#COPY /home/nimbix/.jupyter/jupyter_notebook_config.py /tmp/
+#USER nimbix
+#COPY /tmp/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
 USER root
 
 RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
