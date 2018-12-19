@@ -108,8 +108,8 @@ RUN echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebo
 RUN echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
 RUN pwd
 RUN ls -al ~/.jupyter/
-RUN ls -al /home/nimbix
-COPY /home/nimbix/.jupyter/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
+RUN ls -al /home
+#COPY /home/nimbix/.jupyter/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
 #USER root
 #COPY /home/nimbix/.jupyter/jupyter_notebook_config.py /tmp/
 #USER nimbix
