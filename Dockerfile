@@ -106,7 +106,9 @@ RUN jupyter notebook --generate-config
 RUN echo "c.NotebookApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_notebook_config.py
 RUN echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
 RUN echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
+USER root
 COPY ~/.jupyter/jupyter_notebook_config.py /workspace/
+USER nimbix
 COPY /workspace/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
 USER root
 
