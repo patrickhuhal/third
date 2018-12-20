@@ -120,7 +120,7 @@ USER root
 RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
 # update cmake
-RUN apt-get install libncurses5-dev && apt-get update &&\
+RUN apt-get update -y && apt-get install -y --no-install-recommends libncurses5-dev && \
    cd /tmp && \
    git clone https://github.com/Kitware/CMake.git && \
    cd CMake && git checkout v3.13.2 && \
