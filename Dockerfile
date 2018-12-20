@@ -96,29 +96,38 @@ COPY $appdef /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 # Anaconda Python
-RUN wget https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-ppc64le.sh
-RUN bash Anaconda3-5.3.0-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
+RUN wget https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-ppc64le.sh && \
+   bash Anaconda3-5.3.0-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
 ENV PATH /usr/local/anaconda3/bin:$PATH
 RUN conda install -c conda-forge boost
 
 USER nimbix
-RUN jupyter notebook --generate-config
-RUN echo "c.NotebookApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_notebook_config.py
-RUN echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
-RUN echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
-RUN pwd
-RUN ls -al ~/.jupyter/
-RUN ls -al /home
+RUN jupyter notebook --generate-config && \
+   echo "c.NotebookApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_notebook_config.py && \
+   echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py && \
+   echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
+#RUN pwd
+#RUN ls -al ~/.jupyter/
+#RUN ls -al /home
 #COPY /home/nimbix/.jupyter/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
 #USER root
 #COPY /home/nimbix/.jupyter/jupyter_notebook_config.py /tmp/
 #USER nimbix
 #COPY /tmp/jupyter_notebook_config.py /home/nimbix/.jupyter/jupyter_notebook_config.py
+
 USER root
 
 RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
+# update cmake
+RUN apt-get install libncurses5-dev && apt-get update &&\
+   cd /tmp && \
+   git clone https://github.com/Kitware/CMake.git && \
+   cd CMake && git checkout v3.13.2 && \
+   mkdir build && cd build && \
+   cmake -DBUILD_CursesDialog=ON .. && \
+   make -j16 && make install && \
+   cd /tmp && rm -rf CMake
+
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
-
-
