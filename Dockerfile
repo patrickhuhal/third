@@ -6,7 +6,7 @@
 #   gnu compilers
 
 #power8
-ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
+ARG baseimg=nvidia/cuda-ppc64le10.0-cudnn7-devel-ubuntu18.04
 
 #power9
 #ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu18.04
@@ -18,7 +18,7 @@ FROM $baseimg AS devel
 
 #power8
 ARG appdef=AppDef.json
-ARG sample=9-2
+ARG sample=10-0
 
 #power9
 #ARG appdef=AppDef2.json
@@ -74,8 +74,8 @@ RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/soft
 RUN tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j 
 RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/openmpi --disable-getpwuid --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs && \
-    make -j16 && \
-    make -j16 install
+    make -j32 && \
+    make -j32 install
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
@@ -86,8 +86,8 @@ COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 
 
-ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/usr/lib/nvidia-396
-RUN cd /usr/local/cuda/samples && make -j16 -k ; exit 0
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/usr/lib/nvidia-396:/usr/lib/nvidia-410
+RUN cd /usr/local/cuda/samples && make -j32 -k ; exit 0
 RUN ls -l /usr/lib
 
 COPY url.txt /etc/NAE/url.txt
@@ -126,7 +126,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends libncurses5-
    cd CMake && git checkout v3.13.2 && \
    mkdir build && cd build && \
    cmake -DBUILD_CursesDialog=ON .. && \
-   make -j16 && make install && \
+   make -j32 && make install && \
    cd /tmp && rm -rf CMake
 
 # Expose port 22 for local JARVICE emulation in docker
