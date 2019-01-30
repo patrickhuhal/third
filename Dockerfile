@@ -6,7 +6,7 @@
 #   gnu compilers
 
 #power8
-ARG baseimg=nvidia/cuda-ppc64le10.0-cudnn7-devel-ubuntu18.04
+ARG baseimg=nvidia/cuda-ppc64le:10.0-cudnn7-devel-ubuntu18.04
 
 #power9
 #ARG baseimg=nvidia/cuda-ppc64le:9.2-devel-ubuntu18.04
