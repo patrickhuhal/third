@@ -1,5 +1,5 @@
 {
-    "name": "Anaconda Python", 
+    "name": "Ubuntu 18.04 cuda10+openmpi3", 
     "description": "HPC/ML environment on POWER", 
     "author": "Jonas Toelke", 
     "licensed": true, 
