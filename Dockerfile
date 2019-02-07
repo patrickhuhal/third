@@ -65,8 +65,8 @@ RUN apt-get update -y && \
         wget \
         perftest \
         cuda-samples-${sample} \
-        libnuma-dev \
-        nvidia-driver-410
+        libnuma-dev
+        #nvidia-driver-410
      
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
